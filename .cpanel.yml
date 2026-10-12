@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - /bin/cp -R /home/alhilkkw/STH-Web-repo/. /home/alhilkkw/public_html/sth.soug.com.tr/
+    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan migrate --force
+    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan cache:clear
+    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan config:clear
+    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan view:clear
