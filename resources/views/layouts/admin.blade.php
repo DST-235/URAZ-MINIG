@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ config('locales.'.app()->getLocale().'.dir', 'ltr') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title','Admin') — STH Admin</title>
+    <title>@yield('title','Admin') — {{ \App\Models\Setting::get('site_name','Uraz Mining & Trading') }} Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <style>
@@ -24,16 +24,16 @@
 [dir="rtl"] .nav-link::before { left: auto; right: 0; border-radius: 3px 0 0 3px; }
 [dir="rtl"] .dropdown-content { right: auto; left: 0; }
 :root {
-    --primary-50: #eff6ff; --primary-100: #dbeafe; --primary-200: #bfdbfe;
-    --primary-300: #93c5fd; --primary-400: #60a5fa; --primary-500: #3b82f6;
-    --primary-600: #2563eb; --primary-700: #1d4ed8; --primary-800: #1e40af; --primary-900: #1e3a8a;
-    --dark-50: #f8fafc; --dark-100: #f1f5f9; --dark-200: #e2e8f0; --dark-300: #cbd5e1;
-    --dark-400: #94a3b8; --dark-500: #64748b; --dark-600: #475569; --dark-700: #334155;
-    --dark-800: #1e293b; --dark-900: #0f172a;
-    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-tertiary: #334155;
-    --bg-surface: #475569; --bg-glass: rgba(30,41,59,0.95);
-    --text-primary: #ffffff; --text-secondary: #f1f5f9; --text-tertiary: #e2e8f0;
-    --text-muted: #cbd5e1; --text-disabled: #94a3b8; --text-link: #60a5fa; --text-link-hover: #93c5fd;
+    --primary-50: #FBF3E0; --primary-100: #F5E6C2; --primary-200: #ECD48F;
+    --primary-300: #E0BA3D; --primary-400: #D4AC2E; --primary-500: #C9A227;
+    --primary-600: #A88420; --primary-700: #8B6B1A; --primary-800: #6E5414; --primary-900: #5C3E10;
+    --dark-50: #F7F4EF; --dark-100: #EDE7DC; --dark-200: #DCD3C0; --dark-300: #C4B89D;
+    --dark-400: #9C8F76; --dark-500: #6B6152; --dark-600: #4A4034; --dark-700: #332B22;
+    --dark-800: #241D16; --dark-900: #15120F;
+    --bg-primary: #15120F; --bg-secondary: #201B16; --bg-tertiary: #2E2720;
+    --bg-surface: #3D332A; --bg-glass: rgba(32,27,22,0.95);
+    --text-primary: #ffffff; --text-secondary: #F1ECE3; --text-tertiary: #E3DACB;
+    --text-muted: #C9BCA8; --text-disabled: #9C8F76; --text-link: #E0BA3D; --text-link-hover: #F0D27A;
     --success: #10b981; --warning: #f59e0b; --danger: #ef4444; --info: #06b6d4;
     --border-radius: 8px; --border-radius-sm: 6px; --border-radius-lg: 12px;
     --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
@@ -42,6 +42,8 @@
 }
 * { box-sizing: border-box; }
 body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg-primary); color:var(--text-primary); line-height:1.5; -webkit-font-smoothing:antialiased; overflow-x:hidden; font-size:14px; }
+[dir="rtl"] body { font-family:'Noto Sans Arabic','Inter',sans-serif; }
+html[lang="zh"] body { font-family:'Noto Sans SC','Inter',sans-serif; }
 h1,h2,h3,h4,h5,h6 { color:var(--text-primary); font-weight:600; }
 p { color:var(--text-secondary); font-size:0.875rem; }
 a { color:var(--text-link); text-decoration:none; transition:var(--transition); }
@@ -242,7 +244,7 @@ small, .small { color:var(--text-muted) !important; }
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="{{ route('admin.dashboard') }}" class="sidebar-logo">
-                @php $adminLogo = \App\Models\Setting::get('site_logo'); $adminName = \App\Models\Setting::get('site_name','STH'); @endphp
+                @php $adminLogo = \App\Models\Setting::get('site_logo'); $adminName = \App\Models\Setting::get('site_name','Uraz Mining &amp; Trading LTD'); @endphp
                 @if($adminLogo)
                     <img src="{{ asset('storage/'.$adminLogo) }}" alt="{{ $adminName }}" style="height:34px;max-width:120px;object-fit:contain;">
                 @else
@@ -258,7 +260,7 @@ small, .small { color:var(--text-muted) !important; }
             </button>
         </div>
         @php
-            $inContent = request()->routeIs('admin.sliders*','admin.services*','admin.projects*','admin.team*','admin.blog*','admin.testimonials*','admin.stats*','admin.faqs*','admin.pages*');
+            $inContent = request()->routeIs('admin.sliders*','admin.products*','admin.operations*','admin.team*','admin.blog*','admin.testimonials*','admin.stats*','admin.faqs*','admin.pages*');
             $inComms   = request()->routeIs('admin.contact*');
             $inSystem  = request()->routeIs('admin.users*','admin.settings*');
             $unread    = \App\Models\ContactMessage::unread()->count();
@@ -281,11 +283,11 @@ small, .small { color:var(--text-muted) !important; }
                 <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ request()->routeIs('admin.sliders*') ? 'active' : '' }}">
                     <i class="fas fa-images"></i><span>{{ __('messages.admin_sliders') }}</span>
                 </a>
-                <a href="{{ route('admin.services.index') }}" class="nav-link {{ request()->routeIs('admin.services*') ? 'active' : '' }}">
-                    <i class="fas fa-cogs"></i><span>{{ __('messages.admin_services') }}</span>
+                <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}">
+                    <i class="fas fa-gem"></i><span>{{ __('messages.admin_products') }}</span>
                 </a>
-                <a href="{{ route('admin.projects.index') }}" class="nav-link {{ request()->routeIs('admin.projects*') ? 'active' : '' }}">
-                    <i class="fas fa-briefcase"></i><span>{{ __('messages.admin_portfolio') }}</span>
+                <a href="{{ route('admin.operations.index') }}" class="nav-link {{ request()->routeIs('admin.operations*') ? 'active' : '' }}">
+                    <i class="fas fa-route"></i><span>{{ __('messages.admin_operations') }}</span>
                 </a>
                 <a href="{{ route('admin.team.index') }}" class="nav-link {{ request()->routeIs('admin.team*') ? 'active' : '' }}">
                     <i class="fas fa-users"></i><span>{{ __('messages.admin_team') }}</span>
@@ -361,9 +363,9 @@ small, .small { color:var(--text-muted) !important; }
                         <i class="fas fa-globe me-1"></i>{{ strtoupper(app()->getLocale()) }}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" style="background:var(--bg-secondary);border-color:var(--dark-600);">
-                        <li><a class="dropdown-item" href="{{ route('lang.switch','en') }}" style="color:var(--text-secondary);">🇬🇧 English</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lang.switch','fr') }}" style="color:var(--text-secondary);">🇫🇷 Français</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lang.switch','ar') }}" style="color:var(--text-secondary);">🇸🇦 العربية</a></li>
+                        @foreach(config('locales') as $code => $l)
+                        <li><a class="dropdown-item" href="{{ route('lang.switch',$code) }}" style="color:var(--text-secondary);">{{ $l['flag'] }} {{ $l['native'] }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="dropdown">

@@ -2,7 +2,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{Setting, Slider, Project, BlogPost, TeamMember, Testimonial};
+use App\Models\{Setting, Slider, Product, Operation, BlogPost, TeamMember, Testimonial};
 
 class ImageSeeder extends Seeder
 {
@@ -12,7 +12,8 @@ class ImageSeeder extends Seeder
     {
         $this->seedAboutImage();
         $this->seedSliderImages();
-        $this->seedProjectImages();
+        $this->seedProductImages();
+        $this->seedOperationImages();
         $this->seedBlogImages();
         $this->seedTeamImages();
         $this->seedTestimonialImages();
@@ -24,7 +25,7 @@ class ImageSeeder extends Seeder
 
     private function seedAboutImage(): void
     {
-        $url  = 'https://loremflickr.com/800/500/office,team,technology?lock=10';
+        $url  = 'https://loremflickr.com/800/500/minerals,mining,warehouse?lock=10';
         $path = 'settings/about_image.jpg';
 
         $bytes = $this->download($url);
@@ -40,17 +41,16 @@ class ImageSeeder extends Seeder
 
     private function seedSliderImages(): void
     {
-        // Indexed to match slider creation order in SthSeeder:
-        // 0 home/0 · 1 home/1 · 2 home/2 · 3 about · 4 services · 5 portfolio · 6 contact · 7 blog
+        // Indexed to match slider creation order in UrazSeeder:
+        // 0 home/0 · 1 home/1 · 2 home/2 · 3 about · 4 products · 5 operations · 6 contact
         $keywords = [
-            'technology,digital,africa',
-            'business,handshake,africa',
-            'computer,programming,office',
-            'team,office,meeting',
-            'server,technology,innovation',
-            'laptop,work,design',
-            'phone,office,communication',
-            'writing,technology,blog',
+            'minerals,ore,mining',
+            'gold,bars,bullion',
+            'cargo,ship,port',
+            'africa,mining,landscape',
+            'copper,ore,industrial',
+            'warehouse,logistics,storage',
+            'trade,meeting,africa',
         ];
 
         $sliders = Slider::orderBy('id')->get();
@@ -70,47 +70,75 @@ class ImageSeeder extends Seeder
         }
     }
 
-    // ── Projects (800×500) ─────────────────────────────────────────────────────
+    // ── Products (800×500) ────────────────────────────────────────────────────
 
-    private function seedProjectImages(): void
+    private function seedProductImages(): void
     {
-        // Matches project order in SthSeeder:
-        // 0 Al Hilali Cargo · 1 Hilal Shoes · 2 Abouna Dubai Market · 3 Soug Hanana · 4 STH Website
+        // Matches product order in UrazSeeder: 0 Antimony · 1 Gold · 2 Petroleum · 3 Copper · 4 Tungsten
         $keywords = [
-            'logistics,truck,cargo',
-            'shoes,retail,store',
-            'market,africa,trade',
-            'bazaar,market,vendors',
-            'web,laptop,design',
+            'antimony,mineral,ore',
+            'gold,bars,nuggets',
+            'petroleum,oil,rig',
+            'copper,ore,cathode',
+            'tungsten,ore,metal',
         ];
 
-        $projects = Project::orderBy('id')->get();
-        foreach ($projects as $i => $project) {
+        $products = Product::orderBy('id')->get();
+        foreach ($products as $i => $product) {
             $kw   = $keywords[$i % count($keywords)];
-            $lock = 200 + $project->id;
+            $lock = 200 + $product->id;
             $url  = "https://loremflickr.com/800/500/{$kw}?lock={$lock}";
-            $path = "projects/project-{$project->id}.jpg";
+            $path = "products/product-{$product->id}.jpg";
 
             $bytes = $this->download($url);
             if ($bytes && $this->save($path, $bytes)) {
-                $project->update(['image' => $path]);
-                echo "  ✓ project {$project->id}\n";
+                $product->update(['image' => $path]);
+                echo "  ✓ product {$product->id}\n";
             } else {
-                echo "  ✗ project {$project->id} (download failed)\n";
+                echo "  ✗ product {$product->id} (download failed)\n";
             }
         }
     }
 
-    // ── Blog posts (1200×630) ──────────────────────────────────────────────────
+    // ── Operations (800×500) ──────────────────────────────────────────────────
+
+    private function seedOperationImages(): void
+    {
+        // Matches operation order in UrazSeeder: 0 sourcing · 1 logistics · 2 export · 3 warehousing
+        $keywords = [
+            'mining,site,africa',
+            'cargo,truck,road',
+            'cargo,ship,port',
+            'warehouse,storage,industrial',
+        ];
+
+        $operations = Operation::orderBy('id')->get();
+        foreach ($operations as $i => $operation) {
+            $kw   = $keywords[$i % count($keywords)];
+            $lock = 250 + $operation->id;
+            $url  = "https://loremflickr.com/800/500/{$kw}?lock={$lock}";
+            $path = "operations/operation-{$operation->id}.jpg";
+
+            $bytes = $this->download($url);
+            if ($bytes && $this->save($path, $bytes)) {
+                $operation->update(['image' => $path]);
+                echo "  ✓ operation {$operation->id}\n";
+            } else {
+                echo "  ✗ operation {$operation->id} (download failed)\n";
+            }
+        }
+    }
+
+    // ── Blog / News posts (1200×630) ──────────────────────────────────────────
 
     private function seedBlogImages(): void
     {
-        // Matches blog post order:
-        // 0 digital-transformation-chad · 1 market-management-system-chad · 2 choosing-it-partner-chad
+        // Matches post order in UrazSeeder:
+        // 0 rising-global-demand · 1 reliable-trading-partner · 2 understanding-incoterms
         $keywords = [
-            'technology,africa,digital',
-            'market,africa,business',
-            'handshake,office,business',
+            'minerals,africa,trade',
+            'handshake,business,trade',
+            'cargo,port,shipping',
         ];
 
         $posts = BlogPost::orderBy('id')->get();
@@ -134,12 +162,12 @@ class ImageSeeder extends Seeder
 
     private function seedTeamImages(): void
     {
-        // All 4 members are men (Ayoub, Mohamed, Mohamed, Haroun)
+        // Order in UrazSeeder: 0 Uysal Seher (woman) · 1 Kocayigit Nail (man) · 2 Ayoub Oumar (man) · 3 Ibrahim Abakar (man)
         $keywords = [
+            'woman,portrait,professional',
             'man,portrait,professional',
             'businessman,portrait,suit',
             'man,office,professional',
-            'man,portrait,smile',
         ];
 
         $members = TeamMember::orderBy('id')->get();
@@ -163,7 +191,6 @@ class ImageSeeder extends Seeder
 
     private function seedTestimonialImages(): void
     {
-        // All 3 clients are men (Djibrine, Abouna, Mohamed)
         $keywords = [
             'man,portrait,smile',
             'businessman,portrait,smile',
@@ -214,10 +241,6 @@ class ImageSeeder extends Seeder
                 'follow_location' => true,
                 'max_redirects'   => 5,
                 'user_agent'      => 'Mozilla/5.0 (compatible; Laravel seeder)',
-            ],
-            'ssl' => [
-                'verify_peer'      => false,
-                'verify_peer_name' => false,
             ],
         ]);
 

@@ -21,7 +21,7 @@
                             <span><i class="far fa-calendar me-1"></i>{{ $post->published_at?->format('d M Y') }}</span>
                             @if($post->author)<span><i class="far fa-user me-1"></i>{{ $post->author->name }}</span>@endif
                         </div>
-                        <a href="{{ route('blog.show',$post->slug) }}" class="btn-primary-sth" style="font-size:0.82rem;padding:0.45rem 1rem;">{{ __('messages.read_more') }}</a>
+                        <a href="{{ route('blog.show',$post->slug) }}" class="btn-primary-uraz" style="font-size:0.82rem;padding:0.45rem 1rem;">{{ __('messages.read_more') }}</a>
                     </div>
                 </div>
             </div>

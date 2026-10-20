@@ -34,7 +34,7 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 @php $aboutImg = \App\Models\Setting::get('about_image'); @endphp
-                <div style="border-radius:20px;overflow:hidden;height:400px;background:linear-gradient(135deg,#0A1628,#1565C0);">
+                <div style="border-radius:20px;overflow:hidden;height:400px;background:linear-gradient(135deg,#1A140F,#8B5E22);">
                     @if($aboutImg)
                         <img src="{{ asset('storage/'.$aboutImg) }}" alt="{{ __('messages.nav_about') }}"
                              style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -51,7 +51,7 @@
 </section>
 
 {{-- Mission / Vision / Values --}}
-<section class="section-pad bg-light-sth">
+<section class="section-pad bg-light-uraz">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
@@ -130,7 +130,7 @@
             @endforeach
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('team') }}" class="btn-primary-sth">{{ __('messages.view_all') }} {{ __('messages.our_team') }}</a>
+            <a href="{{ route('team') }}" class="btn-primary-uraz">{{ __('messages.view_all') }} {{ __('messages.our_team') }}</a>
         </div>
     </div>
 </section>
@@ -138,7 +138,7 @@
 
 {{-- FAQ --}}
 @if($faqs->count())
-<section class="section-pad bg-light-sth">
+<section class="section-pad bg-light-uraz">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">

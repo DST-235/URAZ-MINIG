@@ -12,13 +12,13 @@
 </div>
 </div>
 @include('components.lang-tabs')
-@foreach(['en'=>'English','fr'=>'Français','ar'=>'العربية'] as $lang => $lbl)
+@foreach(config('locales') as $lang => $l)
 <div class="lang-content" data-lang="{{ $lang }}">
 <div class="row g-3 mb-3">
-<div class="col-md-8"><label class="form-label">{{ __('admin.field_title') }} ({{ $lbl }}) *</label><input type="text" name="title_{{ $lang }}" class="form-control" value="{{ $post?->getTranslation('title',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
-<div class="col-md-4"><label class="form-label">{{ __('admin.field_category') }} ({{ $lbl }})</label><input type="text" name="category_{{ $lang }}" class="form-control" value="{{ $post?->getTranslation('category',$lang) }}"></div>
-<div class="col-12"><label class="form-label">{{ __('admin.field_excerpt') }} ({{ $lbl }})</label><textarea name="excerpt_{{ $lang }}" class="form-control" rows="2">{{ $post?->getTranslation('excerpt',$lang) }}</textarea></div>
-<div class="col-12"><label class="form-label">{{ __('admin.field_content') }} ({{ $lbl }}) *</label><textarea name="content_{{ $lang }}" class="form-control" rows="10" {{ $lang=='en'?'required':'' }}>{{ $post?->getTranslation('content',$lang) }}</textarea></div>
+<div class="col-md-8"><label class="form-label">{{ __('admin.field_title') }} ({{ $l['native'] }}) *</label><input type="text" name="title_{{ $lang }}" class="form-control" value="{{ $post?->getTranslation('title',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
+<div class="col-md-4"><label class="form-label">{{ __('admin.field_category') }} ({{ $l['native'] }})</label><input type="text" name="category_{{ $lang }}" class="form-control" value="{{ $post?->getTranslation('category',$lang) }}"></div>
+<div class="col-12"><label class="form-label">{{ __('admin.field_excerpt') }} ({{ $l['native'] }})</label><textarea name="excerpt_{{ $lang }}" class="form-control" rows="2">{{ $post?->getTranslation('excerpt',$lang) }}</textarea></div>
+<div class="col-12"><label class="form-label">{{ __('admin.field_content') }} ({{ $l['native'] }}) *</label><textarea name="content_{{ $lang }}" class="form-control" rows="10" {{ $lang=='en'?'required':'' }}>{{ $post?->getTranslation('content',$lang) }}</textarea></div>
 </div></div>
 @endforeach
 <div class="mb-4"><label class="form-label">{{ __('admin.field_image') }}</label>@if($post?->image)<img src="{{ asset('storage/'.$post->image) }}" style="height:80px;border-radius:8px;display:block;margin-bottom:0.5rem;">@endif<input type="file" name="image" class="form-control" accept="image/*"></div>

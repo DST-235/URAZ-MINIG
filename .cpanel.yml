@@ -1,8 +1,8 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -R /home/alhilkkw/STH-Web-repo/. /home/alhilkkw/public_html/sth.soug.com.tr/
-    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan migrate --force
-    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan cache:clear
-    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan config:clear
-    - php /home/alhilkkw/public_html/sth.soug.com.tr/artisan view:clear
+    - /bin/cp -R /home/YOUR_CPANEL_USER/Uraz-Web-repo/. /home/YOUR_CPANEL_USER/public_html/YOUR_DOMAIN/
+    - php /home/YOUR_CPANEL_USER/public_html/YOUR_DOMAIN/artisan migrate --force
+    - php /home/YOUR_CPANEL_USER/public_html/YOUR_DOMAIN/artisan cache:clear
+    - php /home/YOUR_CPANEL_USER/public_html/YOUR_DOMAIN/artisan config:clear
+    - php /home/YOUR_CPANEL_USER/public_html/YOUR_DOMAIN/artisan view:clear

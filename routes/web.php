@@ -1,10 +1,10 @@
 <?php
 use Illuminate\Support\Facades\{Route, Artisan};
-use App\Http\Controllers\{HomeController,ServiceController,ProjectController,BlogController,ContactController,PageController};
-use App\Http\Controllers\Admin\{DashboardController,SliderController,ServiceController as AdminServiceController,ProjectController as AdminProjectController,TeamController,TestimonialController,StatController,BlogController as AdminBlogController,FaqController,ContactController as AdminContactController,SettingController,PageController as AdminPageController,UserController as AdminUserController};
+use App\Http\Controllers\{HomeController,ProductController,OperationController,BlogController,ContactController,PageController};
+use App\Http\Controllers\Admin\{DashboardController,SliderController,ProductController as AdminProductController,OperationController as AdminOperationController,TeamController,TestimonialController,StatController,BlogController as AdminBlogController,FaqController,ContactController as AdminContactController,SettingController,PageController as AdminPageController,UserController as AdminUserController};
 
 // ── One-time setup route (migrate + seed) ────────────────────────────
-// Usage: https://sth.soug.com.tr/setup/{SETUP_TOKEN}
+// Usage: https://your-domain.example/setup/{SETUP_TOKEN}
 // Add SETUP_TOKEN=your-secret-value to .env before first use.
 Route::get('/setup/{token}', function (string $token) {
     $secret = env('SETUP_TOKEN');
@@ -40,17 +40,17 @@ Route::get('/setup/{token}', function (string $token) {
     }
 
     return response("<!DOCTYPE html><html><head><meta charset='utf-8'>
-        <title>STH Setup</title>
+        <title>Uraz Setup</title>
         <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:#f1f5f9;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
         .card{background:#fff;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.1);overflow:hidden;max-width:800px;width:100%}
-        .head{background:#1e293b;color:#fff;padding:1.25rem 1.5rem;font-size:1.1rem;font-weight:700;letter-spacing:.02em}
+        .head{background:#1a140f;color:#fff;padding:1.25rem 1.5rem;font-size:1.1rem;font-weight:700;letter-spacing:.02em}
         table{width:100%;border-collapse:collapse}td{border-bottom:1px solid #e5e7eb;vertical-align:top}
         .foot{padding:1rem 1.5rem;font-size:.8rem;color:#64748b;background:#f8fafc;}</style>
     </head><body>
         <div class='card'>
-            <div class='head'>🚀 STH Setup — " . config('app.url') . "</div>
+            <div class='head'>🚀 Uraz Setup — " . config('app.url') . "</div>
             <table>{$rows}</table>
-            <div class='foot'>Completed at " . now()->format('Y-m-d H:i:s T') . " &mdash; Remove or rotate <code>SETUP_TOKEN</code> in <code>.env</code> after setup.</div>
+            <div class='foot'>Completed at " . now()->format('Y-m-d H:i:s T') . " &mdash; Remove or rotate <code>SETUP_TOKEN</code> in <code>.env</code> after setup. Note: the admin user and content are seeded locally via <code>php artisan db:seed</code>, not through this route, to avoid the admin password transiting an HTTP response.</div>
         </div>
     </body></html>");
 })->name('setup');
@@ -60,8 +60,7 @@ Route::get('/dashboard', fn() => redirect('/admin'))->middleware(['auth'])->name
 
 // Language switcher
 Route::get('/lang/{locale}', function(string $locale) {
-    $supported = ['en','fr','ar'];
-    if (in_array($locale, $supported)) {
+    if (array_key_exists($locale, config('locales'))) {
         session(['locale' => $locale]);
         app()->setLocale($locale);
     }
@@ -74,10 +73,10 @@ Route::middleware([])->group(function () {
     Route::get('/about',       [PageController::class,'about'])->name('about');
     Route::get('/team',        [PageController::class,'team'])->name('team');
     Route::get('/highlights',  [PageController::class,'highlights'])->name('highlights');
-    Route::get('/services',    [ServiceController::class,'index'])->name('services');
-    Route::get('/services/{slug}', [ServiceController::class,'show'])->name('services.show');
-    Route::get('/portfolio',   [ProjectController::class,'index'])->name('portfolio');
-    Route::get('/portfolio/{project}', [ProjectController::class,'show'])->name('portfolio.show');
+    Route::get('/products',    [ProductController::class,'index'])->name('products');
+    Route::get('/products/{slug}', [ProductController::class,'show'])->name('products.show');
+    Route::get('/operations',  [OperationController::class,'index'])->name('operations');
+    Route::get('/operations/{operation}', [OperationController::class,'show'])->name('operations.show');
     Route::get('/blog',        [BlogController::class,'index'])->name('blog');
     Route::get('/blog/{slug}', [BlogController::class,'show'])->name('blog.show');
     Route::get('/contact',     [ContactController::class,'index'])->name('contact');
@@ -90,8 +89,8 @@ Route::middleware([])->group(function () {
 Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/',                        [DashboardController::class,'index'])->name('dashboard');
     Route::resource('sliders',             SliderController::class)->except(['show']);
-    Route::resource('services',            AdminServiceController::class)->except(['show']);
-    Route::resource('projects',            AdminProjectController::class)->except(['show']);
+    Route::resource('products',            AdminProductController::class)->except(['show']);
+    Route::resource('operations',          AdminOperationController::class)->except(['show']);
     Route::resource('team',                TeamController::class)->except(['show']);
     Route::resource('testimonials',        TestimonialController::class)->except(['show']);
     Route::resource('stats',               StatController::class)->except(['show']);

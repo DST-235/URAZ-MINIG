@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale {
     public function handle(Request $request, Closure $next): Response {
-        $supported = ['en','fr','ar'];
+        $supported = array_keys(config('locales'));
         $locale = $request->segment(1);
         if (in_array($locale, $supported)) {
             app()->setLocale($locale);

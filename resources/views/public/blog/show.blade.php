@@ -2,10 +2,10 @@
 @section('title',$post->title)
 @section('content')
 <section class="page-hero" style="min-height:350px;">
-    <div class="page-hero-bg" style="background:linear-gradient(135deg,#0A1628,#1565C0);"></div>
+    <div class="page-hero-bg" style="background:linear-gradient(135deg,#1A140F,#C9A227);"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content container w-100">
-        <div class="breadcrumb-sth mb-2">
+        <div class="breadcrumb-uraz mb-2">
             <a href="{{ route('home') }}">{{ __('messages.breadcrumb_home') }}</a>
             <span>/</span>
             <a href="{{ route('blog') }}">{{ __('messages.breadcrumb_blog') }}</a>
@@ -39,7 +39,7 @@
                     @endforeach
                 </div>
                 @endif
-                <div style="background:linear-gradient(135deg,#0A1628,#1565C0);border-radius:16px;padding:1.5rem;margin-top:1.5rem;text-align:center;">
+                <div style="background:linear-gradient(135deg,#1A140F,#C9A227);border-radius:16px;padding:1.5rem;margin-top:1.5rem;text-align:center;">
                     <h6 style="color:#fff;font-weight:700;margin-bottom:0.75rem;">{{ __('messages.start_project') }}</h6>
                     <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;">{{ __('messages.start_project_text') }}</p>
                     <a href="{{ route('contact') }}" class="btn-white" style="font-size:0.85rem;padding:0.5rem 1.25rem;">{{ __('messages.contact_us') }}</a>

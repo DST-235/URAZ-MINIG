@@ -35,12 +35,12 @@
             </div>
 
             @include('components.lang-tabs')
-            @foreach(['en'=>'English','fr'=>'Français','ar'=>'العربية'] as $lang => $label)
+            @foreach(config('locales') as $lang => $l)
             <div class="lang-content" data-lang="{{ $lang }}">
                 <div class="row g-3 mb-3">
-                    <div class="col-md-6"><label class="form-label">{{ __('admin.field_title') }} ({{ $label }})</label><input type="text" name="title_{{ $lang }}" class="form-control" value="{{ $slider?->getTranslation('title',$lang) ?? old('title_'.$lang) }}"></div>
-                    <div class="col-md-6"><label class="form-label">{{ __('admin.field_btn_text') }} ({{ $label }})</label><input type="text" name="button_text_{{ $lang }}" class="form-control" value="{{ $slider?->getTranslation('button_text',$lang) ?? old('button_text_'.$lang) }}"></div>
-                    <div class="col-12"><label class="form-label">Subtitle ({{ $label }})</label><textarea name="subtitle_{{ $lang }}" class="form-control" rows="2">{{ $slider?->getTranslation('subtitle',$lang) ?? old('subtitle_'.$lang) }}</textarea></div>
+                    <div class="col-md-6"><label class="form-label">{{ __('admin.field_title') }} ({{ $l['native'] }})</label><input type="text" name="title_{{ $lang }}" class="form-control" value="{{ $slider?->getTranslation('title',$lang) ?? old('title_'.$lang) }}"></div>
+                    <div class="col-md-6"><label class="form-label">{{ __('admin.field_btn_text') }} ({{ $l['native'] }})</label><input type="text" name="button_text_{{ $lang }}" class="form-control" value="{{ $slider?->getTranslation('button_text',$lang) ?? old('button_text_'.$lang) }}"></div>
+                    <div class="col-12"><label class="form-label">Subtitle ({{ $l['native'] }})</label><textarea name="subtitle_{{ $lang }}" class="form-control" rows="2">{{ $slider?->getTranslation('subtitle',$lang) ?? old('subtitle_'.$lang) }}</textarea></div>
                 </div>
             </div>
             @endforeach

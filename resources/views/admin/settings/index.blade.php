@@ -6,7 +6,7 @@
 @csrf
 <h6 style="color:var(--text-tertiary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">{{ __('admin.settings_general') }}</h6>
 <div class="row g-3 mb-4">
-<div class="col-md-4"><label class="form-label">{{ __('admin.settings_site_name') }}</label><input type="text" name="site_name" class="form-control" value="{{ $settings['site_name']->value[0] ?? 'STH' }}"></div>
+<div class="col-md-4"><label class="form-label">{{ __('admin.settings_site_name') }}</label><input type="text" name="site_name" class="form-control" value="{{ $settings['site_name']->value[0] ?? 'Uraz Mining & Trading LTD' }}"></div>
 <div class="col-md-8"><label class="form-label">{{ __('admin.settings_tagline') }}</label><input type="text" name="site_tagline" class="form-control" value="{{ $settings['site_tagline']->value ?? '' }}"></div>
 <div class="col-md-6"><label class="form-label">{{ __('admin.settings_logo') }}</label><input type="file" name="site_logo" class="form-control" accept="image/*"></div>
 <div class="col-md-6">
@@ -63,9 +63,9 @@
         </p>
         <div class="d-flex align-items-center gap-3 flex-wrap">
             <div class="d-flex align-items-center gap-2">
-                <input type="color" id="harmonyColor" class="color-swatch-sm" value="#1565C0">
+                <input type="color" id="harmonyColor" class="color-swatch-sm" value="#C9A227">
                 <input type="text"  id="harmonyHex"   class="form-control form-control-sm"
-                       style="width:92px;font-family:monospace;font-size:0.82rem;" maxlength="7" value="#1565C0">
+                       style="width:92px;font-family:monospace;font-size:0.82rem;" maxlength="7" value="#C9A227">
                 <span style="font-size:0.78rem;color:var(--text-muted);">Brand color</span>
             </div>
             <div class="d-flex gap-1 flex-wrap">
@@ -87,15 +87,15 @@
 <div class="row g-3 mb-4">
     @php
         $zones_public = [
-            ['id'=>'colorPublicBg',      'name'=>'public_bg',      'default'=>'#0A1628',
+            ['id'=>'colorPublicBg',      'name'=>'public_bg',      'default'=>'#1A140F',
              'label'=>'Navbar & Footer',      'desc'=>'Header, footer & hero dark layer',
-             'preview'=>'linear-gradient(135deg,#0A1628 0%,#1565C0 100%)'],
-            ['id'=>'colorPublicPrimary', 'name'=>'public_primary', 'default'=>'#1565C0',
+             'preview'=>'linear-gradient(135deg,#1A140F 0%,#C9A227 100%)'],
+            ['id'=>'colorPublicPrimary', 'name'=>'public_primary', 'default'=>'#C9A227',
              'label'=>'Primary Color',        'desc'=>'Buttons, links & headings',
-             'preview'=>'#1565C0'],
-            ['id'=>'colorPublicAccent',  'name'=>'public_accent',  'default'=>'#00B4D8',
+             'preview'=>'#C9A227'],
+            ['id'=>'colorPublicAccent',  'name'=>'public_accent',  'default'=>'#B56A3C',
              'label'=>'Accent Color',         'desc'=>'Highlights, badges & stats',
-             'preview'=>'#00B4D8'],
+             'preview'=>'#B56A3C'],
         ];
     @endphp
     @foreach($zones_public as $z)
@@ -128,15 +128,15 @@
 <div class="row g-3 mb-4">
     @php
         $zones_admin = [
-            ['id'=>'colorAdminBg',      'name'=>'admin_bg',         'default'=>'#0f172a',
+            ['id'=>'colorAdminBg',      'name'=>'admin_bg',         'default'=>'#15120F',
              'label'=>'Page Background',     'desc'=>'Main app background (darkest layer)',
-             'preview'=>'#0f172a'],
-            ['id'=>'colorAdminSurface',  'name'=>'admin_surface_bg', 'default'=>'#1e293b',
+             'preview'=>'#15120F'],
+            ['id'=>'colorAdminSurface',  'name'=>'admin_surface_bg', 'default'=>'#201B16',
              'label'=>'Sidebar & Cards',     'desc'=>'Sidebar, header, cards & panels',
-             'preview'=>'linear-gradient(180deg,#1e293b,#0f172a)'],
-            ['id'=>'colorAdminPrimary', 'name'=>'admin_primary',    'default'=>'#3b82f6',
+             'preview'=>'linear-gradient(180deg,#201B16,#15120F)'],
+            ['id'=>'colorAdminPrimary', 'name'=>'admin_primary',    'default'=>'#C9A227',
              'label'=>'Primary Color',       'desc'=>'Buttons, active states & links',
-             'preview'=>'#3b82f6'],
+             'preview'=>'#C9A227'],
         ];
     @endphp
     @foreach($zones_admin as $z)

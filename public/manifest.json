@@ -1,7 +1,7 @@
 {
-    "name": "System Technologie Hanana",
-    "short_name": "STH",
-    "description": "Leading IT company in Chad providing ERP, government systems, school management, web development and more.",
+    "name": "Uraz Mining & Trading LTD",
+    "short_name": "Uraz",
+    "description": "Uraz Mining & Trading LTD sources, certifies and exports Antimony, Gold, Petroleum, Copper and Tungsten from Africa to global markets.",
     "start_url": "/",
     "scope": "/",
     "id": "/",
@@ -9,8 +9,8 @@
         "client_mode": "focus-existing"
     },
     "display": "standalone",
-    "background_color": "#0A1628",
-    "theme_color": "#0A1628",
+    "background_color": "#1A140F",
+    "theme_color": "#1A140F",
     "orientation": "portrait-primary",
     "icons": [
         {

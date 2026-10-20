@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/admin/web/sth235.com/public_html
+            cd /home/admin/web/YOUR_DOMAIN/public_html
             git pull origin master
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force

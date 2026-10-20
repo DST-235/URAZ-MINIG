@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ app()->getLocale() }}" dir="{{ config('locales.'.app()->getLocale().'.dir', 'ltr') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title','STH') — System Technologie Hanana</title>
-    <meta name="description" content="@yield('meta-description','Leading IT company in Chad. ERP, Government Systems, School Management, Market Systems, Web Development and more.')">
+    <title>@yield('title','Uraz Mining & Trading LTD') — Connecting Africa's Minerals to Global Markets</title>
+    <meta name="description" content="@yield('meta-description','Uraz Mining & Trading LTD sources, certifies and exports Antimony, Gold, Petroleum, Copper and Tungsten from Africa to global markets.')">
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- AOS Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
 html { overflow-x: hidden; }
 :root {
-    --navy: #0A1628;
-    --navy-light: #0D1F3C;
-    --blue: #1565C0;
-    --blue-bright: #1E88E5;
-    --cyan: #00B4D8;
-    --cyan-light: #90E0EF;
-    --gold: #FFB703;
-    --light-bg: #F4F7FB;
-    --light-bg2: #EEF2F9;
-    --text-dark: #0D1B2A;
-    --text-body: #374151;
-    --text-muted: #6B7280;
+    --navy: #1A140F;
+    --navy-light: #26201A;
+    --blue: #C9A227;
+    --blue-bright: #E0BA3D;
+    --cyan: #B56A3C;
+    --cyan-light: #D99A6C;
+    --gold: #C9A227;
+    --light-bg: #FAF6EE;
+    --light-bg2: #F3ECDD;
+    --text-dark: #1F160F;
+    --text-body: #4A3F33;
+    --text-muted: #8A7A66;
     --white: #FFFFFF;
-    --border: #E5E9F0;
-    --gradient-hero: linear-gradient(135deg, #0A1628 0%, #1565C0 100%);
-    --gradient-card: linear-gradient(135deg, #0D1F3C, #1565C0);
-    --shadow: 0 4px 20px rgba(10,22,40,0.12);
-    --shadow-lg: 0 10px 40px rgba(10,22,40,0.18);
+    --border: #E8DFCB;
+    --gradient-hero: linear-gradient(135deg, #1A140F 0%, #8B5E22 100%);
+    --gradient-card: linear-gradient(135deg, #26201A, #8B5E22);
+    --shadow: 0 4px 20px rgba(26,20,15,0.12);
+    --shadow-lg: 0 10px 40px rgba(26,20,15,0.18);
     --transition: all 0.3s ease;
 }
 [dir="rtl"] { font-family: 'Noto Sans Arabic', 'Inter', sans-serif; }
 [dir="ltr"] { font-family: 'Inter', sans-serif; }
+html[lang="zh"] { font-family: 'Noto Sans SC', 'Inter', sans-serif; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { color: var(--text-body); background: #fff; overflow-x: hidden; }
 a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -50,21 +51,21 @@ img { max-width: 100%; }
 .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; color: var(--text-dark); line-height: 1.2; }
 .section-subtitle { font-size: 1rem; color: var(--text-muted); max-width: 600px; }
 .badge-pill { display: inline-block; padding: 0.4rem 1.1rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-.badge-blue { background: rgba(21,101,192,0.12); color: var(--blue); }
-.btn-primary-sth { background: var(--blue); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); display: inline-block; }
-.btn-primary-sth:hover { background: var(--navy); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow); }
-.btn-outline-sth { border: 2px solid var(--blue); color: var(--blue); padding: 0.7rem 1.9rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); display: inline-block; background: transparent; }
-.btn-outline-sth:hover { background: var(--blue); color: #fff; }
+.badge-blue { background: rgba(201,162,39,0.12); color: var(--blue); }
+.btn-primary-uraz { background: var(--blue); color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); display: inline-block; }
+.btn-primary-uraz:hover { background: var(--navy); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-outline-uraz { border: 2px solid var(--blue); color: var(--blue); padding: 0.7rem 1.9rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); display: inline-block; background: transparent; }
+.btn-outline-uraz:hover { background: var(--blue); color: #fff; }
 .btn-white { background: #fff; color: var(--navy); padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; transition: var(--transition); display: inline-block; }
 .btn-white:hover { background: var(--cyan-light); color: var(--navy); transform: translateY(-2px); }
 .btn-outline-white { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 0.7rem 1.9rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: var(--transition); display: inline-block; background: transparent; }
 .btn-outline-white:hover { background: rgba(255,255,255,0.15); border-color: #fff; color: #fff; }
 
 /* ===== NAVBAR ===== */
-.navbar-sth { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: var(--transition); padding: 0; }
-.navbar-sth.scrolled { background: rgba(10,22,40,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-.navbar-sth .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 72px; max-width: 1300px; margin: 0 auto; }
-.navbar-brand-sth { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.4rem; color: #fff; }
+.navbar-uraz { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: var(--transition); padding: 0; }
+.navbar-uraz.scrolled { background: rgba(26,20,15,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+.navbar-uraz .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; height: 72px; max-width: 1300px; margin: 0 auto; }
+.navbar-brand-uraz { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.4rem; color: #fff; }
 .navbar-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--blue), var(--cyan)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 900; color: #fff; }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
 .nav-links li a { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; padding: 0.5rem 0.9rem; border-radius: 6px; transition: var(--transition); }
@@ -79,11 +80,13 @@ img { max-width: 100%; }
 .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: var(--cyan); }
 .nav-dropdown-menu a i { width: 20px; text-align: center; color: var(--cyan); }
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
-.lang-switcher { display: flex; align-items: center; gap: 0.25rem; }
-.lang-btn { padding: 0.3rem 0.6rem; border-radius: 5px; color: rgba(255,255,255,0.65); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--transition); border: 1px solid transparent; }
-.lang-btn:hover,.lang-btn.active { color: #fff; border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); }
+.lang-dropdown-btn { padding: 0.35rem 0.7rem; border-radius: 6px; color: rgba(255,255,255,0.8); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: var(--transition); border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); display: inline-flex; align-items: center; gap: 0.4rem; }
+.lang-dropdown-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+.lang-dropdown-menu { min-width: 180px; padding: 0.4rem; border-radius: 10px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); }
+.lang-dropdown-menu .dropdown-item { border-radius: 6px; padding: 0.5rem 0.75rem; font-size: 0.88rem; font-weight: 500; }
+.lang-dropdown-menu .dropdown-item.active, .lang-dropdown-menu .dropdown-item:hover { background: var(--light-bg); color: var(--gold); }
 .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.4rem; cursor: pointer; padding: 0.25rem; line-height: 1; }
-.mobile-inline-lang { display: none; align-items: center; gap: 0.15rem; }
+.mobile-inline-lang { display: none; align-items: center; }
 
 /* ── Mobile drawer ── */
 .mobile-nav-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1098; backdrop-filter: blur(2px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s ease, visibility 0.3s ease; }
@@ -119,9 +122,9 @@ img { max-width: 100%; }
 
 /* Lang + footer area */
 .mobile-nav-footer { padding: 1rem 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-.mobile-lang { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-.mobile-lang a { flex: 1; text-align: center; padding: 0.45rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 600; transition: var(--transition); }
-.mobile-lang a.active, .mobile-lang a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.mobile-lang { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.mobile-lang a { flex: 1 1 30%; text-align: center; padding: 0.45rem 0.3rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 0.78rem; font-weight: 600; transition: var(--transition); white-space: nowrap; }
+.mobile-lang a.active, .mobile-lang a:hover { background: var(--gold); border-color: var(--gold); color: #1A140F; }
 
 /* ===== SLIDER ===== */
 /* RTL fix: force physical LTR layout on the track so translateX always works correctly */
@@ -142,7 +145,7 @@ img { max-width: 100%; }
 .slider-text-right { text-align: right; }
 [dir="rtl"] .slider-text-left { text-align: right; }
 [dir="rtl"] .slider-text-right { text-align: left; }
-.slide-badge { display: inline-block; background: rgba(0,180,216,0.2); border: 1px solid rgba(0,180,216,0.4); color: var(--cyan); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.slide-badge { display: inline-block; background: rgba(181,106,60,0.2); border: 1px solid rgba(181,106,60,0.4); color: var(--cyan); padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.2rem; }
 .slide-title { font-size: clamp(2rem, 5.5vw, 4.5rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.2rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 .slide-subtitle { font-size: clamp(1rem, 2vw, 1.25rem); color: rgba(255,255,255,0.85); max-width: 600px; line-height: 1.6; margin-bottom: 2rem; }
 .slider-text-center .slide-subtitle { margin-left: auto; margin-right: auto; }
@@ -166,20 +169,20 @@ img { max-width: 100%; }
 .page-hero { position: relative; min-height: 400px; overflow: hidden; display: flex; align-items: flex-end; padding-bottom: 3rem; }
 @media (max-width: 768px) { .page-hero { min-height: 300px; padding-bottom: 2rem; } }
 .page-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-.page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,22,40,0.6), rgba(10,22,40,0.85)); }
+.page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,20,15,0.6), rgba(26,20,15,0.85)); }
 .page-hero-content { position: relative; z-index: 1; padding-top: 120px; }
 .page-hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: #fff; }
 .page-hero-sub { color: rgba(255,255,255,0.75); font-size: 1.1rem; }
-.breadcrumb-sth { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-.breadcrumb-sth a { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
-.breadcrumb-sth a:hover { color: var(--cyan); }
-.breadcrumb-sth span { color: rgba(255,255,255,0.4); font-size: 0.85rem; }
-.breadcrumb-sth .current { color: var(--cyan); font-size: 0.85rem; }
+.breadcrumb-uraz { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.breadcrumb-uraz a { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+.breadcrumb-uraz a:hover { color: var(--cyan); }
+.breadcrumb-uraz span { color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+.breadcrumb-uraz .current { color: var(--cyan); font-size: 0.85rem; }
 
 /* ===== SERVICES ===== */
 .service-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: var(--transition); height: 100%; display: flex; flex-direction: column; }
 .service-card:hover { border-color: var(--blue); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-.service-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(21,101,192,0.1), rgba(0,180,216,0.1)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--blue); margin-bottom: 1.25rem; }
+.service-icon { width: 60px; height: 60px; background: linear-gradient(135deg, rgba(201,162,39,0.1), rgba(181,106,60,0.1)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--blue); margin-bottom: 1.25rem; }
 .service-card h5 { font-weight: 700; color: var(--text-dark); font-size: 1.1rem; margin-bottom: 0.75rem; }
 .service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; flex: 1; }
 .service-card .learn-more { color: var(--blue); font-weight: 600; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.25rem; }
@@ -196,7 +199,7 @@ img { max-width: 100%; }
 .project-card { position: relative; border-radius: 16px; overflow: hidden; height: 280px; cursor: pointer; }
 .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .project-card:hover img { transform: scale(1.05); }
-.project-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.3) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0.9; transition: var(--transition); }
+.project-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,15,0.95) 0%, rgba(26,20,15,0.3) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; opacity: 0.9; transition: var(--transition); }
 .project-card:hover .project-card-overlay { opacity: 1; }
 .project-card-placeholder { position: absolute; inset: 0; background: var(--gradient-card); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: rgba(255,255,255,0.3); }
 .project-badge { display: inline-block; padding: 0.25rem 0.75rem; background: var(--cyan); color: var(--navy); border-radius: 50px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; }
@@ -239,8 +242,8 @@ img { max-width: 100%; }
 .blog-meta { color: var(--text-muted); font-size: 0.8rem; display: flex; gap: 1rem; flex-wrap: wrap; }
 
 /* ===== CTA ===== */
-.cta-section { background: linear-gradient(135deg, var(--navy) 0%, #1565C0 100%); padding: 80px 0; position: relative; overflow: hidden; }
-.cta-section::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(0,180,216,0.1); border-radius: 50%; }
+.cta-section { background: linear-gradient(135deg, var(--navy) 0%, #C9A227 100%); padding: 80px 0; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(181,106,60,0.1); border-radius: 50%; }
 .cta-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; color: #fff; margin-bottom: 1rem; }
 .cta-text { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 0; }
 
@@ -256,9 +259,9 @@ img { max-width: 100%; }
 /* ===== CONTACT FORM ===== */
 .contact-form-wrap { background: #fff; border-radius: 20px; padding: 2.5rem; box-shadow: var(--shadow-lg); }
 .contact-info-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; }
-.contact-icon { width: 44px; height: 44px; background: linear-gradient(135deg, rgba(21,101,192,0.1), rgba(0,180,216,0.1)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 1rem; flex-shrink: 0; }
-.form-control-sth { width: 100%; padding: 0.8rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 0.95rem; color: var(--text-dark); background: #fff; transition: var(--transition); outline: none; }
-.form-control-sth:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(21,101,192,0.08); }
+.contact-icon { width: 44px; height: 44px; background: linear-gradient(135deg, rgba(201,162,39,0.1), rgba(181,106,60,0.1)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); font-size: 1rem; flex-shrink: 0; }
+.form-control-uraz { width: 100%; padding: 0.8rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 0.95rem; color: var(--text-dark); background: #fff; transition: var(--transition); outline: none; }
+.form-control-uraz:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(201,162,39,0.08); }
 
 /* ===== FOOTER ===== */
 .footer { background: var(--navy); color: rgba(255,255,255,0.75); }
@@ -306,15 +309,15 @@ img { max-width: 100%; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.5} }
 .section-divider { height: 1px; background: var(--border); margin: 0; }
-.bg-light-sth { background: var(--light-bg); }
-.bg-light-sth2 { background: var(--light-bg2); }
+.bg-light-uraz { background: var(--light-bg); }
+.bg-light-uraz2 { background: var(--light-bg2); }
 .text-blue { color: var(--blue) !important; }
 .text-cyan { color: var(--cyan) !important; }
 @media (max-width: 991.98px) {
     .mobile-menu-btn { display: block; }
     .nav-links, .nav-actions { display: none; }
     .mobile-inline-lang { display: flex; }
-    .navbar-sth { background: rgba(10,22,40,0.96) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .navbar-uraz { background: rgba(26,20,15,0.96) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
 }
 @media (max-width: 576px) { .section-pad { padding: 50px 0; } .slide-title { font-size: clamp(1.6rem,7vw,2.5rem); } .contact-form-wrap { padding: 1.5rem; } .slider-scrolldown { display: none; } }
 @media (max-width: 767px) { .about-badge { left: 0.75rem; bottom: -1rem; } [dir="rtl"] .about-badge { left: auto; right: 0.75rem; } }
@@ -329,19 +332,20 @@ img { max-width: 100%; }
 :root {
     @if($dynPublicBg)
     --navy: {{ $dynPublicBg }};
-    --navy-light: color-mix(in srgb, {{ $dynPublicBg }} 80%, {{ $dynPrimary ?? '#1565C0' }});
+    --navy-light: color-mix(in srgb, {{ $dynPublicBg }} 80%, {{ $dynPrimary ?? '#C9A227' }});
     @endif
     @if($dynPrimary)
     --blue: {{ $dynPrimary }};
     --blue-bright: {{ $dynPrimary }};
+    --gold: {{ $dynPrimary }};
     @endif
     @if($dynAccent)
     --cyan: {{ $dynAccent }};
     --cyan-light: color-mix(in srgb, {{ $dynAccent }} 45%, #fff);
     @endif
     @if($dynPublicBg || $dynPrimary)
-    --gradient-hero: linear-gradient(135deg, {{ $dynPublicBg ?? '#0A1628' }} 0%, {{ $dynPrimary ?? '#1565C0' }} 100%);
-    --gradient-card: linear-gradient(135deg, {{ $dynPublicBg ?? '#0D1F3C' }}, {{ $dynPrimary ?? '#1565C0' }});
+    --gradient-hero: linear-gradient(135deg, {{ $dynPublicBg ?? '#1A140F' }} 0%, {{ $dynPrimary ?? '#C9A227' }} 100%);
+    --gradient-card: linear-gradient(135deg, {{ $dynPublicBg ?? '#26201A' }}, {{ $dynPrimary ?? '#C9A227' }});
     @endif
 }
 </style>
@@ -349,11 +353,11 @@ img { max-width: 100%; }
     @stack('styles')
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0A1628">
+    <meta name="theme-color" content="#1A140F">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="STH">
+    <meta name="apple-mobile-web-app-title" content="Uraz Mining &amp; Trading">
     <link rel="apple-touch-icon" href="/pwa/icons/ios/180.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/pwa/icons/ios/152.png">
     <link rel="apple-touch-icon" sizes="167x167" href="/pwa/icons/ios/167.png">
@@ -365,7 +369,7 @@ img { max-width: 100%; }
 
 @php
     $siteLogo = \App\Models\Setting::get('site_logo');
-    $siteName = \App\Models\Setting::get('site_name', 'STH');
+    $siteName = \App\Models\Setting::get('site_name', 'Uraz Mining &amp; Trading LTD');
 @endphp
 
 <!-- Page Loader -->
@@ -385,9 +389,9 @@ img { max-width: 100%; }
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <!-- Navbar -->
-<nav class="navbar-sth" id="navbar" style="background: transparent;">
+<nav class="navbar-uraz" id="navbar" style="background: transparent;">
     <div class="navbar-inner">
-        <a href="{{ route('home') }}" class="navbar-brand-sth">
+        <a href="{{ route('home') }}" class="navbar-brand-uraz">
             @if($siteLogo)
                 <img src="{{ asset('storage/'.$siteLogo) }}" alt="{{ $siteName }}" style="height:40px;max-width:150px;object-fit:contain;">
             @else
@@ -399,39 +403,49 @@ img { max-width: 100%; }
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">{{ __('messages.nav_home') }}</a></li>
             <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">{{ __('messages.nav_about') }}</a></li>
             <li class="nav-dropdown">
-                <a href="{{ route('services') }}" class="{{ request()->routeIs('services*') ? 'active' : '' }}">
-                    {{ __('messages.nav_services') }} <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+                <a href="{{ route('products') }}" class="{{ request()->routeIs('products*') ? 'active' : '' }}">
+                    {{ __('messages.nav_products') }} <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
                 </a>
                 <div class="nav-dropdown-menu">
-                    @foreach(\App\Models\Service::root()->active()->where('show_in_nav',true)->orderBy('order')->get() as $svc)
-                    <a href="{{ route('services.show', $svc->slug) }}">
-                        <i class="{{ $svc->icon }}"></i> {{ $svc->name }}
+                    @foreach(\App\Models\Product::active()->where('show_in_nav',true)->orderBy('order')->get() as $prod)
+                    <a href="{{ route('products.show', $prod->slug) }}">
+                        <i class="{{ $prod->icon }}"></i> {{ $prod->name }}
                     </a>
                     @endforeach
                 </div>
             </li>
-            <li><a href="{{ route('portfolio') }}" class="{{ request()->routeIs('portfolio*') ? 'active' : '' }}">{{ __('messages.nav_portfolio') }}</a></li>
+            <li><a href="{{ route('operations') }}" class="{{ request()->routeIs('operations*') ? 'active' : '' }}">{{ __('messages.nav_operations') }}</a></li>
             <li><a href="{{ route('highlights') }}" class="{{ request()->routeIs('highlights') ? 'active' : '' }}">{{ __('messages.nav_highlights') }}</a></li>
             <li><a href="{{ route('team') }}" class="{{ request()->routeIs('team') ? 'active' : '' }}">{{ __('messages.nav_team') }}</a></li>
             <li><a href="{{ route('blog') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">{{ __('messages.nav_blog') }}</a></li>
             <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">{{ __('messages.nav_contact') }}</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="lang-switcher">
-                <a href="{{ route('lang.switch','en') }}" class="lang-btn {{ app()->getLocale()=='en' ? 'active':'' }}">EN</a>
-                <a href="{{ route('lang.switch','fr') }}" class="lang-btn {{ app()->getLocale()=='fr' ? 'active':'' }}">FR</a>
-                <a href="{{ route('lang.switch','ar') }}" class="lang-btn {{ app()->getLocale()=='ar' ? 'active':'' }}">AR</a>
+            <div class="dropdown lang-switcher">
+                <button class="lang-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                    {{ config('locales.'.app()->getLocale().'.flag') }} {{ strtoupper(app()->getLocale()) }} <i class="fas fa-chevron-down" style="font-size:0.6rem;"></i>
+                </button>
+                <ul class="dropdown-menu lang-dropdown-menu">
+                    @foreach(config('locales') as $code => $l)
+                    <li><a href="{{ route('lang.switch',$code) }}" class="dropdown-item {{ app()->getLocale()==$code ? 'active':'' }}">{{ $l['flag'] }} {{ $l['native'] }}</a></li>
+                    @endforeach
+                </ul>
             </div>
             @auth
-                <a href="{{ route('admin.dashboard') }}" class="btn-primary-sth" style="font-size:0.82rem;padding:0.5rem 1rem;">Admin</a>
+                <a href="{{ route('admin.dashboard') }}" class="btn-primary-uraz" style="font-size:0.82rem;padding:0.5rem 1rem;">Admin</a>
             @else
                 <a href="{{ route('login') }}" class="btn-outline-white" style="font-size:0.82rem;padding:0.45rem 1.1rem;border-width:1.5px;">{{ __('messages.login') }}</a>
             @endauth
         </div>
-        <div class="mobile-inline-lang">
-            <a href="{{ route('lang.switch','en') }}" class="lang-btn {{ app()->getLocale()=='en' ? 'active':'' }}">EN</a>
-            <a href="{{ route('lang.switch','fr') }}" class="lang-btn {{ app()->getLocale()=='fr' ? 'active':'' }}">FR</a>
-            <a href="{{ route('lang.switch','ar') }}" class="lang-btn {{ app()->getLocale()=='ar' ? 'active':'' }}">AR</a>
+        <div class="dropdown mobile-inline-lang">
+            <button class="lang-dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false" type="button">
+                {{ config('locales.'.app()->getLocale().'.flag') }} {{ strtoupper(app()->getLocale()) }}
+            </button>
+            <ul class="dropdown-menu lang-dropdown-menu dropdown-menu-end">
+                @foreach(config('locales') as $code => $l)
+                <li><a href="{{ route('lang.switch',$code) }}" class="dropdown-item {{ app()->getLocale()==$code ? 'active':'' }}">{{ $l['flag'] }} {{ $l['native'] }}</a></li>
+                @endforeach
+            </ul>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
     </div>
@@ -463,23 +477,23 @@ img { max-width: 100%; }
                 </a>
             </li>
             <li class="mobile-nav-item">
-                <button class="mobile-nav-link {{ request()->routeIs('services*') ? 'active sub-open' : '' }}" id="mobileServicesToggle" type="button">
-                    <i class="fas fa-cogs icon"></i>
-                    <span>{{ __('messages.nav_services') }}</span>
+                <button class="mobile-nav-link {{ request()->routeIs('products*') ? 'active sub-open' : '' }}" id="mobileServicesToggle" type="button">
+                    <i class="fas fa-gem icon"></i>
+                    <span>{{ __('messages.nav_products') }}</span>
                     <i class="fas fa-chevron-down caret"></i>
                 </button>
-                <ul class="mobile-sub-menu {{ request()->routeIs('services*') ? 'open' : '' }}" id="mobileServicesMenu">
-                    <li><a href="{{ route('services') }}" class="mobile-sub-link"><i class="fas fa-th-list"></i>{{ __('messages.view_all') }}</a></li>
-                    @foreach(\App\Models\Service::root()->active()->where('show_in_nav',true)->orderBy('order')->take(8)->get() as $svc)
-                    <li><a href="{{ route('services.show', $svc->slug) }}" class="mobile-sub-link">
-                        <i class="{{ $svc->icon }}"></i>{{ $svc->name }}
+                <ul class="mobile-sub-menu {{ request()->routeIs('products*') ? 'open' : '' }}" id="mobileServicesMenu">
+                    <li><a href="{{ route('products') }}" class="mobile-sub-link"><i class="fas fa-th-list"></i>{{ __('messages.view_all') }}</a></li>
+                    @foreach(\App\Models\Product::active()->where('show_in_nav',true)->orderBy('order')->take(8)->get() as $prod)
+                    <li><a href="{{ route('products.show', $prod->slug) }}" class="mobile-sub-link">
+                        <i class="{{ $prod->icon }}"></i>{{ $prod->name }}
                     </a></li>
                     @endforeach
                 </ul>
             </li>
             <li class="mobile-nav-item">
-                <a href="{{ route('portfolio') }}" class="mobile-nav-link {{ request()->routeIs('portfolio*') ? 'active' : '' }}">
-                    <i class="fas fa-briefcase icon"></i>{{ __('messages.nav_portfolio') }}
+                <a href="{{ route('operations') }}" class="mobile-nav-link {{ request()->routeIs('operations*') ? 'active' : '' }}">
+                    <i class="fas fa-route icon"></i>{{ __('messages.nav_operations') }}
                 </a>
             </li>
             <li class="mobile-nav-item">
@@ -519,11 +533,11 @@ img { max-width: 100%; }
     </div>
     <div class="mobile-nav-footer">
         <div class="mobile-lang">
-            <a href="{{ route('lang.switch','en') }}" class="{{ app()->getLocale()=='en' ? 'active':'' }}">EN</a>
-            <a href="{{ route('lang.switch','fr') }}" class="{{ app()->getLocale()=='fr' ? 'active':'' }}">FR</a>
-            <a href="{{ route('lang.switch','ar') }}" class="{{ app()->getLocale()=='ar' ? 'active':'' }}">AR</a>
+            @foreach(config('locales') as $code => $l)
+            <a href="{{ route('lang.switch',$code) }}" class="{{ app()->getLocale()==$code ? 'active':'' }}">{{ $l['flag'] }} {{ strtoupper($code) }}</a>
+            @endforeach
         </div>
-        <div style="text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.35);">&copy; {{ date('Y') }} STH — System Technologie Hanana</div>
+        <div style="text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.35);">&copy; {{ date('Y') }} {{ \App\Models\Setting::get('site_name','Uraz Mining & Trading LTD') }}</div>
     </div>
 </div>
 
@@ -540,7 +554,7 @@ img { max-width: 100%; }
                     @else
                         <div class="footer-brand-name">{{ $siteName }}</div>
                     @endif
-                    <div class="footer-brand-sub">System Technologie Hanana</div>
+                    <div class="footer-brand-sub">{{ \App\Models\Setting::get('site_tagline') }}</div>
                     <p class="footer-desc">{{ \App\Models\Setting::get('about_short','Leading IT company in N\'Djamena, Chad.') }}</p>
                     <div class="footer-social">
                         @php $fb=\App\Models\Setting::get('facebook'); $li=\App\Models\Setting::get('linkedin'); $tw=\App\Models\Setting::get('twitter'); $ig=\App\Models\Setting::get('instagram'); @endphp
@@ -551,10 +565,10 @@ img { max-width: 100%; }
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-6">
-                    <h6 class="footer-title">{{ __('messages.nav_services') }}</h6>
+                    <h6 class="footer-title">{{ __('messages.nav_products') }}</h6>
                     <ul class="footer-links">
-                        @foreach(\App\Models\Service::root()->active()->orderBy('order')->take(6)->get() as $svc)
-                        <li><a href="{{ route('services.show',$svc->slug) }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ $svc->name }}</a></li>
+                        @foreach(\App\Models\Product::active()->orderBy('order')->take(6)->get() as $prod)
+                        <li><a href="{{ route('products.show',$prod->slug) }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ $prod->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -563,7 +577,7 @@ img { max-width: 100%; }
                     <ul class="footer-links">
                         <li><a href="{{ route('about') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_about') }}</a></li>
                         <li><a href="{{ route('team') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_team') }}</a></li>
-                        <li><a href="{{ route('portfolio') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_portfolio') }}</a></li>
+                        <li><a href="{{ route('operations') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_operations') }}</a></li>
                         <li><a href="{{ route('highlights') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_highlights') }}</a></li>
                         <li><a href="{{ route('blog') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_blog') }}</a></li>
                         <li><a href="{{ route('contact') }}"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i>{{ __('messages.nav_contact') }}</a></li>
@@ -571,10 +585,11 @@ img { max-width: 100%; }
                 </div>
                 <div class="col-lg-4">
                     <h6 class="footer-title">{{ __('messages.address') }}</h6>
-                    <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>{{ \App\Models\Setting::get('site_address','Avenue Charles de Gaulle') }}, {{ \App\Models\Setting::get('site_city',"N'Djamena") }}, {{ \App\Models\Setting::get('site_country','Chad') }}</span></div>
-                    <div class="footer-contact-item"><i class="fas fa-phone"></i><span dir="ltr">{{ \App\Models\Setting::get('site_phone','+235 60 83 79 79') }}</span></div>
+                    @php $addressParts = array_filter([\App\Models\Setting::get('site_address'), \App\Models\Setting::get('site_city'), \App\Models\Setting::get('site_country')]); @endphp
+                    @if(count($addressParts))<div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>{{ implode(', ', $addressParts) }}</span></div>@endif
+                    @if(\App\Models\Setting::get('site_phone'))<div class="footer-contact-item"><i class="fas fa-phone"></i><span dir="ltr">{{ \App\Models\Setting::get('site_phone') }}</span></div>@endif
                     @if(\App\Models\Setting::get('site_phone2'))<div class="footer-contact-item"><i class="fas fa-phone"></i><span dir="ltr">{{ \App\Models\Setting::get('site_phone2') }}</span></div>@endif
-                    <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>{{ \App\Models\Setting::get('site_email','contact@sth-tchad.com') }}</span></div>
+                    @if(\App\Models\Setting::get('site_email'))<div class="footer-contact-item"><i class="fas fa-envelope"></i><span>{{ \App\Models\Setting::get('site_email') }}</span></div>@endif
                 </div>
             </div>
         </div>
@@ -582,7 +597,7 @@ img { max-width: 100%; }
     <hr class="footer-divider">
     <div class="container">
         <div class="footer-bottom">
-            <span>&copy; {{ date('Y') }} STH — System Technologie Hanana. {{ __('messages.rights') }}</span>
+            <span>&copy; {{ date('Y') }} {{ \App\Models\Setting::get('site_name','Uraz Mining & Trading LTD') }}. {{ __('messages.rights') }}</span>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;">
                 <a href="{{ route('privacy') }}">{{ __('messages.privacy') }}</a>
                 <a href="{{ route('terms') }}">{{ __('messages.terms') }}</a>
@@ -715,14 +730,14 @@ if (statsSection) counterObserver.observe(statsSection);
 @stack('scripts')
 
 <!-- PWA Install Banner -->
-<div id="pwa-install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#0A1628,#1565C0);color:#fff;padding:1rem 1.25rem;box-shadow:0 -4px 24px rgba(0,0,0,0.35);align-items:center;gap:1rem;flex-wrap:wrap;">
-    <img src="/pwa/icons/android/launchericon-48x48.png?v=2" alt="STH" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;">
+<div id="pwa-install-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1A140F,#C9A227);color:#fff;padding:1rem 1.25rem;box-shadow:0 -4px 24px rgba(0,0,0,0.35);align-items:center;gap:1rem;flex-wrap:wrap;">
+    <img src="/pwa/icons/android/launchericon-48x48.png?v=2" alt="Uraz Mining &amp; Trading" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;">
     <div style="flex:1;min-width:0;">
-        <div style="font-weight:700;font-size:0.95rem;">Install STH App</div>
+        <div style="font-weight:700;font-size:0.95rem;">Install Uraz App</div>
         <div style="font-size:0.8rem;opacity:0.8;">Fast access, works offline</div>
     </div>
     <div style="display:flex;gap:0.5rem;flex-shrink:0;">
-        <button id="pwa-install-btn" style="background:#fff;color:#0A1628;border:none;padding:0.45rem 1.2rem;border-radius:6px;font-weight:700;font-size:0.88rem;cursor:pointer;">Install</button>
+        <button id="pwa-install-btn" style="background:#fff;color:#1A140F;border:none;padding:0.45rem 1.2rem;border-radius:6px;font-weight:700;font-size:0.88rem;cursor:pointer;">Install</button>
         <button id="pwa-dismiss-btn" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);padding:0.45rem 0.9rem;border-radius:6px;font-size:0.88rem;cursor:pointer;">Not now</button>
     </div>
 </div>

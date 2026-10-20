@@ -5,21 +5,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('operations', function (Blueprint $table) {
             $table->id();
             $table->json('title');
             $table->json('description');
-            $table->json('client')->nullable();
-            $table->json('category')->nullable();
+            $table->json('location')->nullable();
+            $table->string('category')->nullable();
             $table->string('image')->nullable();
-            $table->string('url')->nullable();
-            $table->string('technologies')->nullable();
-            $table->date('completed_at')->nullable();
+            $table->string('tags')->nullable();
+            $table->date('active_since')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
-    public function down(): void { Schema::dropIfExists('projects'); }
+    public function down(): void { Schema::dropIfExists('operations'); }
 };

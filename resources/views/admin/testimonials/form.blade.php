@@ -11,12 +11,12 @@
 <div class="col-md-2 d-flex align-items-end"><div class="form-check"><input class="form-check-input" type="checkbox" name="is_active" {{ $testimonial?->is_active ?? true ? 'checked':'' }}><label class="form-check-label">{{ __('admin.active') }}</label></div></div>
 </div>
 @include('components.lang-tabs')
-@foreach(['en'=>'English','fr'=>'Français','ar'=>'العربية'] as $lang => $lbl)
+@foreach(config('locales') as $lang => $l)
 <div class="lang-content" data-lang="{{ $lang }}">
 <div class="row g-3 mb-3">
-<div class="col-md-6"><label class="form-label">{{ __('admin.field_author_name') }} ({{ $lbl }}) *</label><input type="text" name="author_name_{{ $lang }}" class="form-control" value="{{ $testimonial?->getTranslation('author_name',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
-<div class="col-md-6"><label class="form-label">{{ __('admin.field_position') }} ({{ $lbl }})</label><input type="text" name="author_position_{{ $lang }}" class="form-control" value="{{ $testimonial?->getTranslation('author_position',$lang) }}"></div>
-<div class="col-12"><label class="form-label">{{ __('admin.field_quote') }} ({{ $lbl }}) *</label><textarea name="quote_{{ $lang }}" class="form-control" rows="3" {{ $lang=='en'?'required':'' }}>{{ $testimonial?->getTranslation('quote',$lang) }}</textarea></div>
+<div class="col-md-6"><label class="form-label">{{ __('admin.field_author_name') }} ({{ $l['native'] }}) *</label><input type="text" name="author_name_{{ $lang }}" class="form-control" value="{{ $testimonial?->getTranslation('author_name',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
+<div class="col-md-6"><label class="form-label">{{ __('admin.field_position') }} ({{ $l['native'] }})</label><input type="text" name="author_position_{{ $lang }}" class="form-control" value="{{ $testimonial?->getTranslation('author_position',$lang) }}"></div>
+<div class="col-12"><label class="form-label">{{ __('admin.field_quote') }} ({{ $l['native'] }}) *</label><textarea name="quote_{{ $lang }}" class="form-control" rows="3" {{ $lang=='en'?'required':'' }}>{{ $testimonial?->getTranslation('quote',$lang) }}</textarea></div>
 </div></div>
 @endforeach
 <div class="mb-4"><label class="form-label">{{ __('admin.field_author_photo') }}</label>@if($testimonial?->author_photo)<img src="{{ asset('storage/'.$testimonial->author_photo) }}" style="height:60px;width:60px;border-radius:50%;object-fit:cover;display:block;margin-bottom:0.5rem;">@endif<input type="file" name="author_photo" class="form-control" accept="image/*"></div>

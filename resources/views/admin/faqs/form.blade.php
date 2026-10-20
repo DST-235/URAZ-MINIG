@@ -10,11 +10,11 @@
 <div class="col-md-2 d-flex align-items-end"><div class="form-check"><input class="form-check-input" type="checkbox" name="is_active" {{ $faq?->is_active ?? true ? 'checked':'' }}><label class="form-check-label">{{ __('admin.active') }}</label></div></div>
 </div>
 @include('components.lang-tabs')
-@foreach(['en'=>'English','fr'=>'Français','ar'=>'العربية'] as $lang => $lbl)
+@foreach(config('locales') as $lang => $l)
 <div class="lang-content" data-lang="{{ $lang }}">
 <div class="row g-3 mb-3">
-<div class="col-12"><label class="form-label">Question ({{ $lbl }}) *</label><input type="text" name="question_{{ $lang }}" class="form-control" value="{{ $faq?->getTranslation('question',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
-<div class="col-12"><label class="form-label">Answer ({{ $lbl }}) *</label><textarea name="answer_{{ $lang }}" class="form-control" rows="4" {{ $lang=='en'?'required':'' }}>{{ $faq?->getTranslation('answer',$lang) }}</textarea></div>
+<div class="col-12"><label class="form-label">Question ({{ $l['native'] }}) *</label><input type="text" name="question_{{ $lang }}" class="form-control" value="{{ $faq?->getTranslation('question',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
+<div class="col-12"><label class="form-label">Answer ({{ $l['native'] }}) *</label><textarea name="answer_{{ $lang }}" class="form-control" rows="4" {{ $lang=='en'?'required':'' }}>{{ $faq?->getTranslation('answer',$lang) }}</textarea></div>
 </div></div>
 @endforeach
 <div class="d-flex gap-2 mt-3"><button type="submit" class="btn btn-primary">{{ $faq ? __('admin.update') : __('admin.create') }}</button><a href="{{ route('admin.faqs.index') }}" class="btn btn-secondary">{{ __('admin.cancel') }}</a></div>

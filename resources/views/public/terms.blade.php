@@ -2,7 +2,7 @@
 @section('title',__('messages.terms'))
 @section('content')
 <section class="page-hero" style="min-height:280px;">
-    <div class="page-hero-bg" style="background:linear-gradient(135deg,#0A1628,#1565C0);"></div>
+    <div class="page-hero-bg" style="background:linear-gradient(135deg,#1A140F,#C9A227);"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content container w-100">
         <h1 class="page-hero-title">{{ __('messages.terms') }}</h1>

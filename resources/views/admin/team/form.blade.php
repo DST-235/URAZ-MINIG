@@ -12,12 +12,12 @@
 <div class="col-md-1 d-flex align-items-end"><div class="form-check"><input class="form-check-input" type="checkbox" name="is_active" {{ $member?->is_active ?? true ? 'checked':'' }}><label class="form-check-label">{{ __('admin.active') }}</label></div></div>
 </div>
 @include('components.lang-tabs')
-@foreach(['en'=>'English','fr'=>'Français','ar'=>'العربية'] as $lang => $lbl)
+@foreach(config('locales') as $lang => $l)
 <div class="lang-content" data-lang="{{ $lang }}">
 <div class="row g-3 mb-3">
-<div class="col-md-6"><label class="form-label">{{ __('admin.field_name') }} ({{ $lbl }}) *</label><input type="text" name="name_{{ $lang }}" class="form-control" value="{{ $member?->getTranslation('name',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
-<div class="col-md-6"><label class="form-label">{{ __('admin.field_position') }} ({{ $lbl }}) *</label><input type="text" name="position_{{ $lang }}" class="form-control" value="{{ $member?->getTranslation('position',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
-<div class="col-12"><label class="form-label">{{ __('admin.field_bio') }} ({{ $lbl }})</label><textarea name="bio_{{ $lang }}" class="form-control" rows="3">{{ $member?->getTranslation('bio',$lang) }}</textarea></div>
+<div class="col-md-6"><label class="form-label">{{ __('admin.field_name') }} ({{ $l['native'] }}) *</label><input type="text" name="name_{{ $lang }}" class="form-control" value="{{ $member?->getTranslation('name',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
+<div class="col-md-6"><label class="form-label">{{ __('admin.field_position') }} ({{ $l['native'] }}) *</label><input type="text" name="position_{{ $lang }}" class="form-control" value="{{ $member?->getTranslation('position',$lang) }}" {{ $lang=='en'?'required':'' }}></div>
+<div class="col-12"><label class="form-label">{{ __('admin.field_bio') }} ({{ $l['native'] }})</label><textarea name="bio_{{ $lang }}" class="form-control" rows="3">{{ $member?->getTranslation('bio',$lang) }}</textarea></div>
 </div></div>
 @endforeach
 <div class="mb-4"><label class="form-label">{{ __('admin.field_photo') }}</label>@if($member?->photo)<img src="{{ asset('storage/'.$member->photo) }}" style="height:80px;width:80px;border-radius:50%;object-fit:cover;display:block;margin-bottom:0.5rem;">@endif<input type="file" name="photo" class="form-control" accept="image/*"></div>
