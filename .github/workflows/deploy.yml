@@ -6,24 +6,36 @@ on:
       - master
 
 jobs:
-  deploy:
+  deploy-production:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to VPS
+      - name: Deploy to Production
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/admin/web/YOUR_DOMAIN/public_html
-            git pull origin master
-            composer install --no-dev --optimize-autoloader
+            set -e
+            cd /home/admin/web/urazmining.com/public_html
+            php artisan down --retry=10 || true
+            trap 'php artisan up' EXIT
+            git fetch origin && git reset --hard origin/master
+            composer install --no-dev -o
+            npm install
+            npm run build
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            php artisan storage:link
             php artisan queue:restart
-            chown -R admin:www-data storage bootstrap/cache
+            chown -R admin:admin storage bootstrap/cache
             chmod -R 775 storage bootstrap/cache
+            php artisan storage:link --force 2>/dev/null || true
+            php artisan up
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://urazmining.com/ || echo "000")
+            if [ "$HTTP_STATUS" = "000" ]; then
+              echo "Health check failed"
+              exit 1
+            fi
+            echo "Deploy completed successfully — HTTP $HTTP_STATUS"
